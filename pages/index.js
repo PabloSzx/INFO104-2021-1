@@ -1,24 +1,54 @@
+import Head from "next/head";
 import Link from "next/link";
 
 const Index = () => {
   return (
-    <div>
-      <h1>H1</h1>
-      <p>
-        <b>Lorem ipsum dolor sit amet</b>, consectetur adipiscing elit. Maecenas
-        placerat massa nec sapien aliquam porttitor. Morbi interdum mauris sed
-        tortor cursus, vel fringilla nibh dignissim. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Sed nec elit id arcu dignissim suscipit sit
-        amet non ipsum. Nam molestie, justo sit amet fringilla venenatis, lorem
-        mi vulputate risus, sit amet molestie magna odio nec odio. Ut dignissim
-        gravida suscipit.
-      </p>
-      <img className="eye" src="/eye.png" alt="Eye" />
-      <p>
-        <Link href="/input">
-          <a>Go to /input</a>
-        </Link>
-      </p>
+    <div className="container">
+      <Head>
+        <title>INFO104 Nextjs App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        <h1 className="title">¿Cómo ha sido tu semana?</h1>
+
+        <p className="description">
+          Get started by editing <code>pages/index.js</code>
+        </p>
+
+        <div className="grid">
+          <Link
+            href={{
+              pathname: "/response",
+              query: { opt: 0 }
+            }}
+          >
+            <a className="card">Excelente! Muy buena semana!</a>
+          </Link>
+          <Link
+            href={{
+              pathname: "/response",
+              query: { opt: 1 }
+            }}
+          >
+            <a className="card">Más o menos no mas!</a>
+          </Link>
+          <Link
+            href={{
+              pathname: "/response",
+              query: { opt: 2 }
+            }}
+          >
+            <a className="card">Horrible! qué semana!!! :(</a>
+          </Link>
+        </div>
+      </main>
+
+      <footer>
+        <a href="https://github.com/PabloSzx/INFO104-2021-1" target="_blank">
+          Repositorio y tutorial
+        </a>
+      </footer>
     </div>
   );
 };
