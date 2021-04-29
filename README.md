@@ -4,7 +4,7 @@
 
 `git clone https://github.com/PabloSzx/INFO104-2021-1`
 
-Este repositorio contiene una aplicación Web usando **React** y **Next.js**. React permite creación de interfaces de usuario **reactivas** y **dinámicas**. **Next.js** es un framework que que combina **React** y **Node.js** para que podamos construir aplicaciones Web completas en javascript (fron-end y back-end) con una orientación a componentes. Revisar definiciones acá [tutorial de Pablo](https://observablehq.com/@pabloszx/info104-2020-2-introduccion-a-react?collection=@pabloszx/info104-2020-2)
+Este repositorio contiene una aplicación Web usando **React** y **Next.js**. React permite creación de interfaces de usuario **reactivas** y **dinámicas**. **Next.js** es un framework que que combina **React** y **Node.js** para que podamos construir aplicaciones Web completas en javascript (front-end y back-end) con una orientación a componentes. Revisar definiciones acá [tutorial de Pablo](https://observablehq.com/@pabloszx/info104-2020-2-introduccion-a-react?collection=@pabloszx/info104-2020-2)
 
 ## Instalar dependencias, módulos node
 Una vez se haya descargado el repositorio, entrar en la carpeta del repositorio y hacer 
