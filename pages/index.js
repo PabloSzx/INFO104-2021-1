@@ -13,7 +13,7 @@ const Index = () => {
         <h1 className="title">¿Cómo ha sido tu semana?</h1>
 
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          Este código está en <code>pages/index.js</code>
         </p>
 
         <div className="grid">
