@@ -28,6 +28,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 700px;
 }
 
 footer {
@@ -50,8 +51,55 @@ footer a {
 }
 
 a {
-  color: inherit;
+  color: #0070f3;
   text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+  border-bottom: 1px solid #999999;
+  width: 100%;
+  background-color: #eaeaea;
+}
+
+.menu a {
+  margin: 20px 20px 20px 20px;
+  border-bottom: 3px solid #e0e0e0;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.currentPage {
+  border-bottom: 3px solid #0070f3 !important;
+  color: #333333;
+}
+
+.counter {
+  font-size: 0.7em;
+  padding-left: 25px;
+  border: 0px !important;
+}
+.counter button {
+  padding: 1px 10px;
+  margin: 0;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+.todo-list {
+}
+.todo-item {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.todo-item-title {
+  flex: 10;
+}
+.todo-item-done {
+  flex: 1;
 }
 
 .title a {

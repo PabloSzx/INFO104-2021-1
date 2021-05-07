@@ -1,5 +1,5 @@
 // CSS para toda la aplicación
-import "../public/style.css";
+import "../styles/style.css";
 
 // Codigo aqui estará presente en todas las páginas
 const App = ({ Component, pageProps }) => {

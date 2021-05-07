@@ -54,3 +54,53 @@ export default About;
 ```
 
 Este es nuestro código base. Luego escribiremos el contenido de la página en el return (). El contenido puede combinar javascript (entre {}), JSX, HTML, CSS, ... Mira el ejemplo en las páginas index.js o response.js.
+
+# Tutorial: aplicaciones Web con React y Next, parte II
+
+## Actualizar el repositorio local
+
+Ir a la carpeta del proyecto y hacer
+
+`$ git pull origin main`
+
+Esto descargará del repositorio remoto varias nuevas páginas y componentes
+
+## Estableciendo un layout común
+
+El componente Layout (components/layout.js) define la organización completa de cada página en términos del header que presenta un menú para acceder a las páginas, y el contenido (main). Lego cada pagina (ver por ejemplo page1.js) carga el componente Layout pasándole parámetros que en react se conocen como _props_ (properties).
+
+El componente Layout recibe dos props:
+
+- _pageId_ que se pasa como propiedad de la etiqueta Layout. Por ejemplo en page1.js
+
+`<Layout pageId="page1">`
+
+- _children_ que representa todos los elementos (componentes, etiquetas html) dentro de Layout
+
+## Comunicando componentes
+
+Hay varias formas de pasar información entre componentes. Entre un parent y un child (componente padre contiene componentes hijos), se puede pasar información via _props_ como se ejemplifica en la sección anterior. Para pasar información desde un componente a su _parent_ se pueden usar funciones **callback**.
+
+El componente ViewCount ejemplifica esto. ViewCount es cargado en Layout, como último elemento en el menu (header). Al cargarlo se le pasan dos props: count y reset.
+
+`<ViewCount count={nViews} reset={resetViews} />`
+
+Notar que a la prop reset se le pasa una función. Esta función es un callback, porque estña definida el el componente parent Layout y ViewCount la invocará cada vez que el evento click de un botón.
+
+`<button onClick={props.reset}>reset</button>`
+
+## Cargando contenido
+
+Hay varias formas de cargar contenido, ya sea de archivos en el computador, de una dirección web (via http o https) o una base de datos. En este ejemplo usaremos fetch de una URL.
+
+Se incluye la carpeta /public/data con un archivo json que contiene una lista de cosas por hacer (To Do List). Este contenido se ha puesto un public porque cargaremos este json usando fetch de una url. La carga de este contenido se hace en la página pageList.js usando la función `getServerSideProps`. Notar que esta función agrega a props la variable _data_ y que PageList lo declara: `export default function PageList({data})...`
+
+Luego PageList agega un componente _TodoItem_ por cada elemento de _data_
+
+```
+{
+  data.map((item) => (
+    <TodoItem item={item} />
+  ))
+}
+```

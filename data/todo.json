@@ -1,0 +1,7 @@
+[
+    {"title":"estudiar programación con react","done":true},
+    {"title":"revisar artículo de conferencia","done":false},
+    {"title":"mecánico","done":false},
+    {"title":"supermercado","done":false},
+    {"title":"Escribir reporte","done":false}
+]

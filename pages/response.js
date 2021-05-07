@@ -6,7 +6,7 @@ const Respuesta = () => {
   let texts = [
     "Que bien! me alegro!",
     "Qué pasó? bueno no debe ser para tanto...",
-    "Pucha, la próxima semna mejor!"
+    "Pucha, la próximo semana mejor!"
   ];
   const router = useRouter();
   console.log(router.query);
