@@ -1,7 +1,7 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
-import Layout from '../components/layout'
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
+import Layout from "../components/layout";
 
 export default function Page1() {
   return (
@@ -11,12 +11,11 @@ export default function Page1() {
       </Head>
       <h1>Página Uno</h1>
       <Image
-          src="/images/eye.png" 
-          height={294} // Desired size with correct aspect ratio
-          width={470} // Desired size with correct aspect ratio
-          alt="ojo"
-          
-        />
+        src="/images/eye.png"
+        height={294} // Desired size with correct aspect ratio
+        width={470} // Desired size with correct aspect ratio
+        alt="ojo"
+      />
     </Layout>
-  )
+  );
 }
