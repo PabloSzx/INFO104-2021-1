@@ -1,12 +1,9 @@
 [
-    {"title":"estudiar programación con react","done":true},
-    {"title":"revisar artículo de conferencia","done":true},
-    {"title":"mecánico","done":false},
-    {"title":"supermercado","done":true},
-    {"title":"supermercado","done":true},
-    {"title":"supermercado","done":true},
-    {"title":"supermercado","done":true},
-    {"title":"supermercado","done":true},
-    {"title":"supermercado","done":true},
-    {"title":"Escribir reporte","done":false}
+    {"id": "todo-1", "title":"estudiar programación con react","done":true},
+    {"id": "todo-2", "title":"revisar artículo de conferencia","done":true},
+    {"id": "todo-3", "title":"mecánico","done":false},
+    {"id": "todo-4", "title":"supermercado","done":true},
+    {"id": "todo-5", "title":"limpiar baño","done":false},
+    {"id": "todo-6", "title":"almuerzo","done":false},
+    {"id": "todo-7", "title":"Escribir reporte","done":false}
 ]

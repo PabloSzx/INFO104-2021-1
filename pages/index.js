@@ -11,11 +11,10 @@ const Index = () => {
 
       <main>
         <Image
-          src="/images/eye.png" 
+          src="/images/eye.png"
           height={294} // Desired size with correct aspect ratio
           width={470} // Desired size with correct aspect ratio
           alt="ojo"
-          
         />
 
         <h1 className="title">¿Cómo ha sido tu semana?</h1>
@@ -25,13 +24,18 @@ const Index = () => {
         </p>
 
         <div className="grid">
-          <Link href="/response?opt=0">
+          <Link
+            hhref={{
+              pathname: "/response",
+              query: { opt: 0 },
+            }}
+          >
             <a className="card">Excelente!</a>
           </Link>
           <Link
             href={{
               pathname: "/response",
-              query: { opt: 1 }
+              query: { opt: 1 },
             }}
           >
             <a className="card">Más o menos no mas!</a>
@@ -39,7 +43,7 @@ const Index = () => {
           <Link
             href={{
               pathname: "/response",
-              query: { opt: 2 }
+              query: { opt: 2 },
             }}
           >
             <a className="card">Horrible! :(</a>

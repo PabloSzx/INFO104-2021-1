@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const Layout = ({ children, pageId }) => {
   const [nViews, setViews] = useState(0);
   function incrementViews() {
-    console.log(nViews);
+    //console.log(nViews);
     setViews(nViews + 1);
   }
   function resetViews() {
