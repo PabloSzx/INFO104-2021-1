@@ -3,7 +3,8 @@ const TodoItem = ({ item }) => {
   const [checked, setChecked] = useState(item.done);
 
   useEffect(() => {
-    setChecked(JSON.parse(localStorage.getItem(item.id)));
+    if (localStorage.getItem(item.id) !== null)
+      setChecked(JSON.parse(localStorage.getItem(item.id)));
   }, []);
 
   useEffect(() => {

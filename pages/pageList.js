@@ -25,6 +25,7 @@ export default function PageList({ data }) {
       if (localStorage.getItem(item.id) === null) {
         localStorage.setItem(item.id, JSON.stringify(item.done));
       }
+      //localStorage.setItem(item.id + "__object", JSON.stringify(item));
     });
   }, []);
 
