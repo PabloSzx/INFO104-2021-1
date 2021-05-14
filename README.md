@@ -105,7 +105,7 @@ Luego PageList agega un componente _TodoItem_ por cada elemento de _data_
 }
 ```
 
-## Haciendo que los checkboxes _recuerden_
+# Tutoral parte III: haciendo que los checkboxes _recuerden_
 
 La idea es que al seleccionar y deseleccionar checkboxes (los componentes TodoItem que se agregan en PageList) éstos recuerden su estado cuando hay cambio de página. La complejidad de esto radica en que cada vez que la página se carga hay un proceso de _rendereo_ de componentes que vuelve a leer el archivo todo.json y vuelve a mostrar la información tal cual definida originalmente y se pierden las selecciones / deselecciones realizadas. Para solucionar esto necesitamos almacenar de alguna forma los valores modificados y luego usar estos valores almacenados al desplegar los componentes TodoItem. Luego debemos intervenir TodoItem y hacer que almacene el nuevo valor una vez que los cambiemos.
 
@@ -115,7 +115,7 @@ Antes de implementar estas nuevas funcionalidades, modificaremos un poco nuestra
 [ {"id": "todo-1", "title":"estudiar programación con react","done":true},... ]
 ```
 
-### Usando el localStorage
+## Usando el localStorage
 
 Los navegadores proveen un espacio para almacenar datos que se denomina localStorage. LocalStorage es una alternativa a las tradicionales _cookies_. En nuestro caso, queremos que al leer del archivo todo.json, almacenemos en el localStorage el estado _done_ de cada item en el arreglo. Para esto, modificamos pageList.js.
 
@@ -154,7 +154,7 @@ Podemos ver el localStorage en las herramientas de desarrollo en el navegador. E
 
 Notar que aunque PageList accede al localStorage, los componentes TodoItem reciben la información obtenida del json todo.json, no los valores almacenados en el localStorage. Esto, denuevo, es así porque los componente TodoItem se renderan antes de que se ejecute el useEffect al montar el componente.
 
-### TodoItem funcional
+## TodoItem funcional
 
 Ahora necesitamos modificar TodoItem para que haga dos cosas: obtenga el estado respectivo almacenado en el localStorage al _montarse_, y modifique el localStorage al seleccionar/deseleccionar el checkbox. Usaremos useEffect también, además de useState.
 
