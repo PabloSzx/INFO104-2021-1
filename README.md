@@ -104,3 +104,97 @@ Luego PageList agega un componente _TodoItem_ por cada elemento de _data_
   ))
 }
 ```
+
+## Haciendo que los checkboxes _recuerden_
+
+La idea es que al seleccionar y deseleccionar checkboxes (los componentes TodoItem que se agregan en PageList) éstos recuerden su estado cuando hay cambio de página. La complejidad de esto radica en que cada vez que la página se carga hay un proceso de _rendereo_ de componentes que vuelve a leer el archivo todo.json y vuelve a mostrar la información tal cual definida originalmente y se pierden las selecciones / deselecciones realizadas. Para solucionar esto necesitamos almacenar de alguna forma los valores modificados y luego usar estos valores almacenados al desplegar los componentes TodoItem. Luego debemos intervenir TodoItem y hacer que almacene el nuevo valor una vez que los cambiemos.
+
+Antes de implementar estas nuevas funcionalidades, modificaremos un poco nuestra data y agregaremos un atributo _id_ a cada item del arreglo en **todo.json**. Si te fijas en todo.json, por ejemplo el primer elemento, ahora tiene id:
+
+```
+[ {"id": "todo-1", "title":"estudiar programación con react","done":true},... ]
+```
+
+### Usando el localStorage
+
+Los navegadores proveen un espacio para almacenar datos que se denomina localStorage. LocalStorage es una alternativa a las tradicionales _cookies_. En nuestro caso, queremos que al leer del archivo todo.json, almacenemos en el localStorage el estado _done_ de cada item en el arreglo. Para esto, modificamos pageList.js.
+
+Primero importaremos useEffect de React
+
+`import { useEffect } from "react";`
+
+useEffect permite definir acciones que se realizan cuando los componentes se inician o cuando cambian valores durante la ejecución del programa. Debemos usar useEffect de lo contrario no podremos acceder al localStorage que reside en el navegador. Recordar que gran parte de nuestro código, incluidos los componentes que usamos _actúan_ o se procesan (se _renderean_) para generar código html y javascript que recibe el navegador.
+
+En el componente PageList, invocamos useEffect de la siguiente forma:
+
+```
+export default function PageList({ data }) {
+  useEffect(() => {
+    data.map((item, index) => {
+      console.log(item.id);
+      if (localStorage.getItem(item.id) === null) {
+        localStorage.setItem(item.id, JSON.stringify(item.done));
+      }
+    });
+  }, []);
+
+  return ( ... )
+
+```
+
+Esto significa:
+
+- Se invoca useEffect() y se le pasan dos parámetros, una función que está definida _inline_ y un arreglo vacío []
+- useEffect es un _hook_ y define que cuando los elementos contenidos en el arreglo (en este caso vacío) cambien durante la ejecución (en el navegador), se ejecutará la función definida
+- El arreglo vacío significa que esto sólo se ejecutará al momento que el componente (PageList) es _montado_, es decir rendereado y listo para ser desplegado
+- La funión definida usa el localStorage. getItem permite encontrar un elemento en el localStorage. Devuelve null si el elemento buscado no existe. Los datos almacenados en el localStorage se identifican con un _key_. En nuetro caso usamos el atributo _id_ de cada _todo_ item
+- Notar el uso de JSON.stringify en setItem. Esto es porque localStorage almacena sólo datos de tipo cadena. Como item.done es un boolean, localStorage almacenará el string 'true' o 'false'.
+
+Podemos ver el localStorage en las herramientas de desarrollo en el navegador. En Chrome se encuentra en la parte de Application.
+
+Notar que aunque PageList accede al localStorage, los componentes TodoItem reciben la información obtenida del json todo.json, no los valores almacenados en el localStorage. Esto, denuevo, es así porque los componente TodoItem se renderan antes de que se ejecute el useEffect al montar el componente.
+
+### TodoItem funcional
+
+Ahora necesitamos modificar TodoItem para que haga dos cosas: obtenga el estado respectivo almacenado en el localStorage al _montarse_, y modifique el localStorage al seleccionar/deseleccionar el checkbox. Usaremos useEffect también, además de useState.
+
+Primero importamos useEffect y useState.
+
+```
+import { useState, useEffect } from "react";
+```
+
+Luego crearmos un _state_ para almacenar el estado del checkbox
+
+```
+const [checked, setChecked] = useState(item.done);
+```
+
+Un useState es también un _hook_ que engancha un componente a una variable en "tiempo de ejecución". En nuestro caso creamos la variable _checked_, inicializada con el valor original del item (item.done) y su setter _setChecked_.
+
+Luego se agregan dos useEffect. El primer useEffect define lo que pasará una vez el componente se _monte_. Esto ocurrirá siempre una vez al comienzo, al cargar la página. El efecto logrado es checked tomará e valor almacenado el el localStorage. Notar que es fundamental la existencia del _id_.
+El segundo useEffect define que ocurrirá cuando _checked_ cambie, y en este caso es cambiar el valor respectivo en el localStorage.
+
+```
+  useEffect(() => {
+    setChecked(JSON.parse(localStorage.getItem(item.id)));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(item.id, JSON.stringify(checked));
+  }, [checked]);
+```
+
+El último paso consiste en especificar qué pasa cuando el checkbox cambia (onChange)
+
+```
+<input
+  type="checkbox"
+  checked={checked}
+  onChange={(e) => {
+    setChecked(!checked);
+  }}
+/>
+```
+
+Notar como el atributo checked del input se asocia a la varibale checked (podríamos haber usado cualquier otro nombre de variable, no es necesario que se llamen igual :S ). Notar también como onChange usa setChecked (el setter creado por el useState) para reestablecer _checked_ con su valor negado. El setter setChecked cambiará sólo la variable (el state) _checked_, y luego el useEffect respectivo reaccionará, alacenando el nuevo valore en el localStorage.

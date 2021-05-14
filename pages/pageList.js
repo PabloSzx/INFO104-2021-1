@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout from "../components/layout";
 import TodoItem from "../components/todoItem";
-import React from "react";
+import { useEffect } from "react";
 
 export async function getServerSideProps(context) {
   const res = await fetch("http://localhost:3000/data/todo.json");
@@ -19,19 +19,13 @@ export async function getServerSideProps(context) {
 }
 
 export default function PageList({ data }) {
-  //console.log(data);
-
-  React.useEffect(() => {
-    console.log(data);
-
+  useEffect(() => {
     data.map((item, index) => {
       console.log(item.id);
       if (localStorage.getItem(item.id) === null) {
         localStorage.setItem(item.id, JSON.stringify(item.done));
-      } else {
       }
     });
-    //localStorage.setItem("listRemembered", data);
   }, []);
 
   return (
