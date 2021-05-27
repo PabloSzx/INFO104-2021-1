@@ -48,7 +48,7 @@ Creemos el archivo `pages/about.js`. En este archivo escribe
 import Head from "next/head";
 
 const About = () => {
-  return ();
+  return null;
 };
 export default About;
 ```
