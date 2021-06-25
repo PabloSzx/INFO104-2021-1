@@ -1,18 +1,11 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 async function fetcher(setData) {
   try {
-    const response = await fetch("/api/hello", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ hello: "world" }),
-    });
+    const response = await axios.post("/api/hello", { hello: "world" });
 
-    const value = await response.json();
-
-    setData(value);
+    setData(response.data);
   } catch (err) {
     setData(err.message);
   }
@@ -26,11 +19,16 @@ export default function HelloApi() {
     fetcher(setData);
   }, []);
 
-  if (data === undefined) {
-    return <p>Loading...</p>;
-  }
-
   return (
-    <p style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</p>
+    <>
+      <input />
+      {data === undefined ? (
+        <p>Loading...</p>
+      ) : (
+        <p style={{ whiteSpace: "pre-wrap" }}>
+          {JSON.stringify(data, null, 2)}
+        </p>
+      )}
+    </>
   );
 }

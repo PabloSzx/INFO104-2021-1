@@ -7,7 +7,7 @@ import { NextApiRequest, NextApiResponse } from "next";
  * @param {NextApiRequest} req
  * @param {NextApiResponse} res
  */
-export default (req, res) => {
+export default async (req, res) => {
   console.log("received: ", JSON.stringify(req.body));
 
   res.send({
