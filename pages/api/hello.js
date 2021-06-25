@@ -8,7 +8,10 @@ import { NextApiRequest, NextApiResponse } from "next";
  * @param {NextApiResponse} res
  */
 export default (req, res) => {
-  console.log("received: ", req.body);
+  console.log("received: ", JSON.stringify(req.body));
 
-  res.send(`API Received: "${req.body}", check your console!`);
+  res.send({
+    message: `API Received: "${JSON.stringify(req.body)}", check your console!`,
+    data: req.body,
+  });
 };

@@ -25,7 +25,7 @@ const Index = () => {
 
         <div className="grid">
           <Link
-            hhref={{
+            href={{
               pathname: "/response",
               query: { opt: 0 },
             }}
